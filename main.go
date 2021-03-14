@@ -13,21 +13,21 @@ import (
 
 func main() {
 
-	// initialize database connection
-	database.InitDatabase()
-
 	app := fiber.New(fiber.Config{
 		Views: django.New("./views", ".django"),
 	})
 
-	// middleware
-	app.Use(recover.New())
-	app.Use(logger.New())
-
 	app.Static("/", "./views")
+
+	// initialize database connection
+	database.InitDatabase()
 
 	// routing functions
 	router.SetupRoutes(app)
+
+	// middleware
+	app.Use(recover.New())
+	app.Use(logger.New())
 
 	log.Fatal(app.Listen(":3000"))
 }

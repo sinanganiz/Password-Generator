@@ -2,13 +2,13 @@
 
 
   <nav class="grey darken-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Password Generator</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Password Generator</a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="#">My Passwords</a></li>
+        <li><a href="MyPasswords">My Passwords</a></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">My Passwords</a></li>
+        <li><a href="MyPasswords">My Passwords</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
@@ -35,7 +35,7 @@
       <div class="row center">
   
         <div>   
-            <a onclick="location.reload();" href="#" id="random-button" class="btn-large waves-effect waves-light orange">Random Password</a>
+            <a  href="/" id="random-button" class="btn-large waves-effect waves-light orange">Random Password</a>
             <a href="#saveModal" id="save-button" class="modal-trigger btn-large waves-effect waves-light green">Save</a>
 
         </div>
@@ -94,12 +94,13 @@
   <!-- Modal Structure -->
   <div id="saveModal" class="modal">
   
-    <form method="GET" action="savePassword">
+    <form method="GET" action="">
       <div class="modal-content">
       <h4>Save Password</h4>
       <br>
         <label style="font-weight: 500; font-size: 1rem !important; color: #5a5a5a !important;" for="passTitle">Write a Title for This Password</label>
         <input id="passTitle" name="passTitle" type="text" placeholder="Write a title ...">
+        <input id="rpassword" name="rpassword" type="hidden" value="{{Password}}" >
     </div>
     <div class="modal-footer">
 
