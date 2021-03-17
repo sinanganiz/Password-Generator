@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"fmt"
 	"math/rand"
+	"strconv"
 	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sinanganizz/password-generator/database"
+	"github.com/sinanganizz/password-generator/models"
 )
 
 func Homepage(c *fiber.Ctx) error {
@@ -14,9 +15,6 @@ func Homepage(c *fiber.Ctx) error {
 	passTitle := c.Query("passTitle")
 	rPassword := c.Query("rpassword")
 	var status bool = false
-	fmt.Println("PassTitle: " + passTitle)
-	fmt.Println("rPassword: " + rPassword)
-	fmt.Println("")
 
 	if passTitle != "" && rPassword != "" {
 		rslt := database.SavePassword(rPassword, passTitle)
@@ -34,7 +32,6 @@ func Homepage(c *fiber.Ctx) error {
 		char := string(charList[randss.Intn(73)])
 		password += char
 	}
-	fmt.Println(password)
 	return c.Render("index", fiber.Map{
 		"Password": password,
 		"Status":   status,
@@ -44,13 +41,40 @@ func Homepage(c *fiber.Ctx) error {
 func MyPasswords(c *fiber.Ctx) error {
 
 	passwords := database.GetPasswords()
-	fmt.Println(passwords)
-	fmt.Println()
 	status := true
 	return c.Render("mypasswords", fiber.Map{
 		"Passwords": passwords,
 		"Status":    status,
 	})
+}
+func DeletePassword(c *fiber.Ctx) error {
+	passID, errAtoi := strconv.Atoi(c.Query("id"))
+	if errAtoi == nil {
+		database.DeletePassword(passID)
+	}
+
+	return c.Redirect("/MyPasswords")
+}
+func Edit(c *fiber.Ctx) error {
+	passID, errAtoi := strconv.Atoi(c.Query("id"))
+	if errAtoi == nil {
+		pass_record := database.GetPassword(passID)
+		return c.Render("edit", fiber.Map{
+			"Password": pass_record,
+		})
+	}
+
+	return c.Redirect("/MyPasswords")
+}
+func EditConfirm(c *fiber.Ctx) error {
+
+	var pass models.Password
+	if err := c.BodyParser(&pass); err == nil {
+		database.UpdatePassword(int(pass.ID), pass.Password, pass.PasswordTitle)
+		return c.Redirect("/MyPasswords")
+	}
+
+	return c.Redirect("/MyPasswords")
 }
 
 // NotFound returns custom 404 page

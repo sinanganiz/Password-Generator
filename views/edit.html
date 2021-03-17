@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1.0"
+    />
+    <title>Password Generate & Save</title>
+
+    <!-- CSS  -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="assets/css/materialize.min.css"
+      media="screen,projection"
+    />
+    <link
+      href="assets/css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen,projection"
+    />
+  </head>
+<body>
+    
+<div class="container mt-5 mb-5">
+
+<form action="EditConfirm" method="POST">
+    <input type="hidden" name="id" value="{{.Password.ID}}">
+
+    <label for="newTitle">Password Title:</label>
+    <input type="text" name="PasswordTitle" value="{{.Password.PasswordTitle}}"> <br>
+    <br>
+    <label for="newPass">Password: </label>
+    <input type="text" name="Password" value="{{.Password.Password}}"> <br>
+<br>
+<br>
+<input type="submit" value="Save Changes">
+</form>
+
+
+    {{template "partials/footer" .}}
+</div>
+</body>
+</html>

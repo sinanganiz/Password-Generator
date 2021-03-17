@@ -8,5 +8,7 @@ import (
 func SetupRoutes(app *fiber.App) {
 	app.Get("/", handlers.Homepage)
 	app.Get("/MyPasswords", handlers.MyPasswords)
-	// app.Get("/savePassword?passTitle=:value", handlers.SavePassword)
+	app.Get("/DeletePassword", handlers.DeletePassword)
+	app.Get("/Edit", handlers.Edit)
+	app.Post("/EditConfirm", handlers.EditConfirm)
 }

@@ -1,4 +1,4 @@
-{% include "partials/header.django" %}
+{{template "partials/header" .}}
 
 
   <nav class="grey darken-3" role="navigation">
@@ -24,12 +24,11 @@
             <div class="z-depth-5" style="width: 50%;">
                 <div class="" style="height:60px; text-align:center;display: flex;justify-content: space-between;padding: 10px 30px;align-items: center;">
                 
-                    <div id="randomPass" style="    font-size: 20px; font-weight: 500; letter-spacing: 1px;">{{Password}}</div>
+                    <div id="randomPass" style="    font-size: 20px; font-weight: 500; letter-spacing: 1px;">{{.Password}}</div>
                     <div onclick="copied()" style="padding: 6px;cursor: pointer;border-radius: 20%;" class="waves-effect waves-teal">
                       <i class="material-icons">content_copy</i>
                       </div>    
                 </div>
-                {% comment %} <p >z-depth-5</p> {% endcomment %}
             </div>
         </div>
       <div class="row center">
@@ -40,13 +39,13 @@
 
         </div>
       </div>
-      {% if Status==true %}
+      {{ if .Status}}
       <div style="font-size:18px;" class="green accent-4  blue-grey-text text-darken-4">
         The password was saved. <br>
-        {{Params}}
+        {{.Params}}
       </div>
       
-       {% endif %}
+       {{ end }}
       <div class="row center" id="social_medias" style="height: 350px;">
 <ul>
   <li>
@@ -100,11 +99,11 @@
       <br>
         <label style="font-weight: 500; font-size: 1rem !important; color: #5a5a5a !important;" for="passTitle">Write a Title for This Password</label>
         <input id="passTitle" name="passTitle" type="text" placeholder="Write a title ...">
-        <input id="rpassword" name="rpassword" type="hidden" value="{{Password}}" >
+        <input id="rpassword" name="rpassword" type="hidden" value="{{.Password}}" >
     </div>
     <div class="modal-footer">
 
-              {% comment %} <a href="savePassword/44" style="padding: 10px; cursor: pointer; border-radius: 5%; font-weight: 500; letter-spacing: 1px;" class="modal-close waves-effect waves-green blue darken-3 blue-text text-lighten-5">Save Password</a> {% endcomment %}
+              
 
         <input type="submit" class="modal-close blue darken-3 blue-text text-lighten-5" style="padding: 10px; cursor: pointer; border-radius: 5%; font-weight: 500; letter-spacing: 1px;" value="Save Password">
     </div>
@@ -113,5 +112,5 @@
   </div>
 
 
-{% include "partials/footer.django" %}
+{{template "partials/footer" .}}
 
