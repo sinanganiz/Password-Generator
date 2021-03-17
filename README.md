@@ -1,2 +1,2 @@
 # Password Generator
- This project made with golang.
+ This project developed with golang.
